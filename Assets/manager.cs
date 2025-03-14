@@ -20,8 +20,8 @@ public class manager : MonoBehaviour {
                 vetGameObj[i]= Instantiate(tetrahedron, new Vector3(vetGameObj[i-1].transform.position.x + 1, 0, 0), vetGameObj[i - 1].transform.rotation);
             //i-1 posicao anterior
         }
-
-        //pegar tetra da posicao 3 e transladar
+        
+        //Parede Rosa
         vetGameObj[3].transform.position = new Vector3(0.5f, 0.86603f, 0.28868f);
         vetGameObj[4].transform.position = new Vector3(1.5f, 0.86603f, 0.28868f);
         vetGameObj[5].transform.position = new Vector3(1.0f, 1.73206f, 0.57736f);
@@ -31,12 +31,33 @@ public class manager : MonoBehaviour {
         vetGameObj[7].transform.Rotate(36.396f, 0f, -180f);
         vetGameObj[8].transform.position = new Vector3(2f, 1.738f, 0.59f);
         vetGameObj[8].transform.Rotate(37.293f, 0f, -180f);
+        
+        // Parede Amarela
+        vetGameObj[9].transform.position = new Vector3(1.496f, 0f, 0.862f);
+        vetGameObj[10].transform.position = new Vector3(1f, 0f, 1.725f);
+        vetGameObj[11].transform.position = new Vector3(0.994f, 0.866f, 1.15f);
+
+        //Parede Vermelha
+        vetGameObj[12].transform.position = new Vector3(0.503f, 0f, 0.866f);
+        vetGameObj[16].transform.position = new Vector3(0.5f,0.861f, 0.287f);
+        vetGameObj[16].transform.Rotate(38.5f, -38.364f, -45.658f);
+
+        //Parede Azul
+        vetGameObj[13].transform.position = new Vector3(2.5f, 0f, 0.866f);
+        vetGameObj[13].transform.Rotate(0f, 180f, 0f);
+        vetGameObj[14].transform.position = new Vector3(1.5f, 0f, 0.866f);
+        vetGameObj[14].transform.Rotate(0f, 180f, 0f);
+        vetGameObj[15].transform.position = new Vector3(2f, 0f, 1.725f);
+        vetGameObj[15].transform.Rotate(0f, 180f, 0f);
+
+
+
+
         //vetGameObj[3].transform.Rotate(110f,0f,0); // 90f
         // vetGameObj[3].transform.RotateAround(transform.position, Vector3.forward, 5f);
 
         pai = new GameObject();
         //pai.transform.position = new Vector3(0,1,0); //pivo
-        //pai.transform.position = new Vector3(0, 1, 0); //pivo
         //vetGameObj[3].transform.parent = pai.transform;
         //vetGameObj[3].transform.bounds
     }
