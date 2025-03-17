@@ -36,11 +36,21 @@ public class manager : MonoBehaviour {
         vetGameObj[9].transform.position = new Vector3(1.496f, 0f, 0.862f);
         vetGameObj[10].transform.position = new Vector3(1f, 0f, 1.725f);
         vetGameObj[11].transform.position = new Vector3(0.994f, 0.866f, 1.15f);
+        vetGameObj[19].transform.position = new Vector3(1.652f, 0.348f, 0.367f);
+        vetGameObj[19].transform.Rotate(197.378f, -55.35602f, -32.92902f);
+        vetGameObj[20].transform.position = new Vector3(1.147f, 0.348f, 1.231f);
+        vetGameObj[20].transform.Rotate(197.378f, -55.35602f, -32.92902f);
+        vetGameObj[21].transform.position = new Vector3(1.152f, 1.21f, 0.656f);
+        vetGameObj[21].transform.Rotate(197.378f, -55.35602f, -32.92902f);
 
         //Parede Vermelha
         vetGameObj[12].transform.position = new Vector3(0.503f, 0f, 0.866f);
         vetGameObj[16].transform.position = new Vector3(0.5f,0.861f, 0.287f);
-        vetGameObj[16].transform.Rotate(38.5f, -38.364f, -45.658f);
+        vetGameObj[16].transform.Rotate(40f, -38.364f, -45f);
+        vetGameObj[17].transform.position = new Vector3(1f, 0.865f, 1.15f);
+        vetGameObj[17].transform.Rotate(40f, -38.364f, -45f);
+        vetGameObj[18].transform.position = new Vector3(1f, 1.7321f, 0.5775f);
+        vetGameObj[18].transform.Rotate(39.95f, -38.41f, -45f);
 
         //Parede Azul
         vetGameObj[13].transform.position = new Vector3(2.5f, 0f, 0.866f);
