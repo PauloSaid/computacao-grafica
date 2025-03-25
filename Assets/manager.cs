@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class manager : MonoBehaviour {
 
+
+    //Paulo e Lugon: Tentativa para encaixar os de cabeca para baixo: criar um game object no meio ou na ponta que tenha sentido do triangulo e usar ele para rotaacionar o trinagulo
+
     public GameObject tetrahedron; // prefab da camrera
     public GameObject[] vetGameObj = new GameObject[24];
     GameObject pai;
     Vector3 m_Center;
 
-    public Transform verticeSuperior;
-    public Transform verticeA, verticeB, verticeC;
-    public Transform tetraedro1, tetraedro2, tetraedro3;
+
+    //O q isso que isso faz? Código do Saulo
+    //public Transform verticeSuperior;
+    //public Transform verticeA, verticeB, verticeC;
+    //public Transform tetraedro1, tetraedro2, tetraedro3;
 
     // Use this for initialization
     void Start () {
@@ -27,7 +32,7 @@ public class manager : MonoBehaviour {
         }
 
 
-        //Parede Rosa
+        // =============== Parede Rosa ===============
         vetGameObj[0].transform.position = new Vector3(0f, 0f, 0f);
         vetGameObj[1].transform.position = new Vector3(1f, 0f, 0f);
         vetGameObj[2].transform.position = new Vector3(2f, 0f, 0f);
@@ -41,7 +46,7 @@ public class manager : MonoBehaviour {
         vetGameObj[15].transform.position = new Vector3(2f, 1.73f, 0.578f);
         vetGameObj[15].transform.Rotate(37f, 0f, 180f);
 
-        //Parede Amarela
+        // =============== Parede Amarela ===============
         vetGameObj[6].transform.position = new Vector3(1.5f, 0f, 0.865f);
         vetGameObj[7].transform.position = new Vector3(1f, 0f, 1.732f);
         vetGameObj[8].transform.position = new Vector3(1f, 0.865f, 1.155f);
@@ -52,7 +57,7 @@ public class manager : MonoBehaviour {
         vetGameObj[21].transform.position = new Vector3(1.147f, 1.22f, 0.651f);
         vetGameObj[21].transform.Rotate(-162.396f, -55.452f, -32.63599f);
 
-        //Parede Vermelha
+        // =============== Parede Vermelha ===============
         vetGameObj[9].transform.position = new Vector3(0.5f, 0f, 0.865f);
         vetGameObj[16].transform.position = new Vector3(0.5f, 0.865f, 0.289f);
         vetGameObj[16].transform.Rotate(40f, -38f, -45f);
@@ -61,7 +66,7 @@ public class manager : MonoBehaviour {
         vetGameObj[18].transform.position = new Vector3(1f, 1.73f, 0.578f);
         vetGameObj[18].transform.Rotate(40f, -38f, -45f);
 
-        //Face Azul
+        // =============== Face Azul ===============
         vetGameObj[10].transform.position = new Vector3(0.5f, 0f, 0.865f);
         vetGameObj[10].transform.Rotate(0f, 60f, 0f);
         vetGameObj[11].transform.position = new Vector3(1.5f, 0f, 0.865f);
@@ -69,36 +74,62 @@ public class manager : MonoBehaviour {
         vetGameObj[12].transform.position = new Vector3(1f, 0f, 1.732f);
         vetGameObj[12].transform.Rotate(0f, 60f, 0f);
 
+
+        // *************** Rotação da base ***************
         GameObject basePivot = new GameObject("RotaçãoBase");
         basePivot.transform.position = new Vector3(1.5f, 0f, 0.87561f);
 
-        //Parede Rosa
+        // =============== Parede Rosa ===============
         vetGameObj[0].transform.SetParent(basePivot.transform);
         vetGameObj[1].transform.SetParent(basePivot.transform);
         vetGameObj[2].transform.SetParent(basePivot.transform);
         vetGameObj[13].transform.SetParent(basePivot.transform);
         vetGameObj[14].transform.SetParent(basePivot.transform);
 
-        //Parede Azul
+        // =============== Face Azul ===============
         vetGameObj[10].transform.SetParent(basePivot.transform);
         vetGameObj[11].transform.SetParent(basePivot.transform);
         vetGameObj[12].transform.SetParent(basePivot.transform);
 
-        //Parede Vermelha
+        // =============== Parede Vermelha ===============
         vetGameObj[9].transform.SetParent(basePivot.transform);
         vetGameObj[16].transform.SetParent(basePivot.transform);
         vetGameObj[17].transform.SetParent(basePivot.transform);
 
-        //Parede Amarela
+        // =============== Parede Amarela ===============
         vetGameObj[6].transform.SetParent(basePivot.transform);
         vetGameObj[7].transform.SetParent(basePivot.transform);
         vetGameObj[19].transform.SetParent(basePivot.transform);
         vetGameObj[20].transform.SetParent(basePivot.transform);
 
-        //O q isso que isso faz?
-        Vector3 eixoVertical = (verticeSuperior.position - ((verticeA.position + verticeB.position + verticeC.position) / 3f)).normalized;
+        // *************** Rotação do meio ***************
+        GameObject meioPivot = new GameObject("RotaçãoMeio");
+        meioPivot.transform.position = new Vector3(1.5f,1.08125f, 0.8663f);
 
-        basePivot.transform.Rotate(eixoVertical, 120f, Space.World);
+        // =============== Parede Rosa ===============
+        vetGameObj[3].transform.SetParent(meioPivot.transform);
+        vetGameObj[4].transform.SetParent(meioPivot.transform);
+        vetGameObj[15].transform.SetParent(meioPivot.transform);
+
+        // =============== Parede Vermelha ===============
+        vetGameObj[18].transform.SetParent(meioPivot.transform);
+
+        // =============== Parede Amarela ===============
+        vetGameObj[8].transform.SetParent(meioPivot.transform);
+        vetGameObj[21].transform.SetParent(meioPivot.transform);
+
+        // *************** Rotacao Topo ***************
+        GameObject topoPivot = new GameObject("RotaçãoTopo");
+        topoPivot.transform.position = new Vector3(1.5f, 1.94625f, 0.86675f);
+
+        // =============== Parede Rosa ===============
+        vetGameObj[5].transform.SetParent(topoPivot.transform);
+
+
+        //O q isso que isso faz? Código do Saulo
+        //Vector3 eixoVertical = (verticeSuperior.position - ((verticeA.position + verticeB.position + verticeC.position) / 3f)).normalized;
+
+        //basePivot.transform.Rotate(eixoVertical, 120f, Space.World);
 
 
 
