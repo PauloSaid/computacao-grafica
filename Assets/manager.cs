@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class manager : MonoBehaviour {
 
-
-    //Paulo e Lugon: Tentativa para encaixar os de cabeca para baixo: criar um game object no meio ou na ponta que tenha sentido do triangulo e usar ele para rotaacionar o trinagulo
-
     public GameObject tetrahedron; // prefab da camrera
     public GameObject[] vetGameObj = new GameObject[24];
     GameObject pai;
     Vector3 m_Center;
 
+    public float rotationSpeed = 120f; 
+    public KeyCode rotationBasePivot = KeyCode.F1;
+    public KeyCode rotationMeioPivot = KeyCode.F2;
+    public KeyCode rotationTopoPivot = KeyCode.F3;
+    public KeyCode rotationSolo0Pivot = KeyCode.F4;
+    public KeyCode rotationSolo2Pivot = KeyCode.F5;
+    public KeyCode rotationSolo7Pivot = KeyCode.F6;
 
-    //O q isso que isso faz? Código do Saulo
-    //public Transform verticeSuperior;
-    //public Transform verticeA, verticeB, verticeC;
-    //public Transform tetraedro1, tetraedro2, tetraedro3;
+    private GameObject basePivot;
+    private GameObject meioPivot;
+    private GameObject topoPivot;
+    private GameObject solo0Pivot;
+    private GameObject solo2Pivot;
+    private GameObject solo7Pivot;
 
     // Use this for initialization
     void Start () {
@@ -74,88 +80,144 @@ public class manager : MonoBehaviour {
         vetGameObj[12].transform.position = new Vector3(1f, 0f, 1.732f);
         vetGameObj[12].transform.Rotate(0f, 60f, 0f);
 
-
         // *************** Rotação da base ***************
         GameObject basePivot = new GameObject("RotaçãoBase");
         basePivot.transform.position = new Vector3(1.5f, 0f, 0.87561f);
-
-        // =============== Parede Rosa ===============
-        vetGameObj[0].transform.SetParent(basePivot.transform);
-        vetGameObj[1].transform.SetParent(basePivot.transform);
-        vetGameObj[2].transform.SetParent(basePivot.transform);
-        vetGameObj[13].transform.SetParent(basePivot.transform);
-        vetGameObj[14].transform.SetParent(basePivot.transform);
-
-        // =============== Face Azul ===============
-        vetGameObj[10].transform.SetParent(basePivot.transform);
-        vetGameObj[11].transform.SetParent(basePivot.transform);
-        vetGameObj[12].transform.SetParent(basePivot.transform);
-
-        // =============== Parede Vermelha ===============
-        vetGameObj[9].transform.SetParent(basePivot.transform);
-        vetGameObj[16].transform.SetParent(basePivot.transform);
-        vetGameObj[17].transform.SetParent(basePivot.transform);
-
-        // =============== Parede Amarela ===============
-        vetGameObj[6].transform.SetParent(basePivot.transform);
-        vetGameObj[7].transform.SetParent(basePivot.transform);
-        vetGameObj[19].transform.SetParent(basePivot.transform);
-        vetGameObj[20].transform.SetParent(basePivot.transform);
 
         // *************** Rotação do meio ***************
         GameObject meioPivot = new GameObject("RotaçãoMeio");
         meioPivot.transform.position = new Vector3(1.5f,1.08125f, 0.8663f);
 
-        // =============== Parede Rosa ===============
-        vetGameObj[3].transform.SetParent(meioPivot.transform);
-        vetGameObj[4].transform.SetParent(meioPivot.transform);
-        vetGameObj[15].transform.SetParent(meioPivot.transform);
-
-        // =============== Parede Vermelha ===============
-        vetGameObj[18].transform.SetParent(meioPivot.transform);
-
-        // =============== Parede Amarela ===============
-        vetGameObj[8].transform.SetParent(meioPivot.transform);
-        vetGameObj[21].transform.SetParent(meioPivot.transform);
-
         // *************** Rotacao Topo ***************
         GameObject topoPivot = new GameObject("RotaçãoTopo");
         topoPivot.transform.position = new Vector3(1.5f, 1.94625f, 0.86675f);
 
-        // =============== Parede Rosa ===============
-        vetGameObj[5].transform.SetParent(topoPivot.transform);
+
+        //Rotações solos serão child das rotações pai para não perder a referencia?
 
 
-        //O q isso que isso faz? Código do Saulo
-        //Vector3 eixoVertical = (verticeSuperior.position - ((verticeA.position + verticeB.position + verticeC.position) / 3f)).normalized;
-
-        //basePivot.transform.Rotate(eixoVertical, 120f, Space.World);
-
-	basePivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
-        meioPivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
-        topoPivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
-
-
-
-
-        //vetGameObj[3].transform.Rotate(110f,0f,0); // 90f
-        // vetGameObj[3].transform.RotateAround(transform.position, Vector3.forward, 5f);
-
-        pai = new GameObject();
-        //pai.transform.position = new Vector3(0,1,0); //pivo
-        //vetGameObj[3].transform.parent = pai.transform;
-        //vetGameObj[3].transform.bounds
+        // *************** Rotacao Diagonal Solo ***************
+        GameObject solo0Pivot = new GameObject("RotaçãoDiagonalSolo0");
+        solo0Pivot.transform.localPosition = new Vector3(0.5f, 0.21625f, 0.2885f);
+        solo0Pivot.transform.SetParent(basePivot.transform);
+        
+        // *************** Rotacao Diagonal Solo 2 ***************
+        GameObject solo2Pivot = new GameObject("RotaçãoDiagonalSolo2");
+        solo2Pivot.transform.localPosition = new Vector3(2.5f, 0.21625f, 0.2885f);
+        solo2Pivot.transform.SetParent(basePivot.transform);
+        
+        // *************** Rotacao Diagonal Solo 7 ***************
+        GameObject solo7Pivot = new GameObject("RotaçãoDiagonalSolo7");
+        solo7Pivot.transform.localPosition = new Vector3(1.5f, 0.21625f, 2.0495f);
+        solo7Pivot.transform.SetParent(basePivot.transform);
     }
+
+
+    //////////////////////////// Rotate ou RotateAround ?????????
 
 	
 	// Update is called once per frame
 	void Update () {
-		//vetGameObj[3].transform.RotateAround(transform.position, Vector3.forward, 5f);
-        //cria um gameobject: Pai. Tem eixo de rotacao
-        //por o objeto como filho deste gameobject
-        //rotaciona o gameObjet(pai): consequencia o filho rotaciona
-        //Instantiate(Object original, Vector3 position, Quaternion rotation, Transform parent);
-        //pai.transform.Rotate(Vector3.right * 5);
-        //vetGameObj[4].transform.Rotate((Vector3.right + Vector3.up) * 5);
-	}
+        if (basePivot == null) basePivot = GameObject.Find("RotaçãoBase");
+        if (meioPivot == null) meioPivot = GameObject.Find("RotaçãoMeio");
+        if (topoPivot == null) topoPivot = GameObject.Find("RotaçãoTopo");
+        if (solo0Pivot == null) solo0Pivot = GameObject.Find("RotaçãoDiagonalSolo0");
+        if (solo2Pivot == null) solo2Pivot = GameObject.Find("RotaçãoDiagonalSolo2");
+        if (solo7Pivot == null) solo7Pivot = GameObject.Find("RotaçãoDiagonalSolo7");
+
+        if (Input.GetKeyDown(rotationBasePivot))
+        {
+            // =============== Parede Rosa ===============
+            vetGameObj[0].transform.SetParent(basePivot.transform);
+            vetGameObj[1].transform.SetParent(basePivot.transform);
+            vetGameObj[2].transform.SetParent(basePivot.transform);
+            vetGameObj[13].transform.SetParent(basePivot.transform);
+            vetGameObj[14].transform.SetParent(basePivot.transform);
+
+            // =============== Face Azul ===============
+            vetGameObj[10].transform.SetParent(basePivot.transform);
+            vetGameObj[11].transform.SetParent(basePivot.transform);
+            vetGameObj[12].transform.SetParent(basePivot.transform);
+
+            // =============== Parede Vermelha ===============
+            vetGameObj[9].transform.SetParent(basePivot.transform);
+            vetGameObj[16].transform.SetParent(basePivot.transform);
+            vetGameObj[17].transform.SetParent(basePivot.transform);
+
+            // =============== Parede Amarela ===============
+            vetGameObj[6].transform.SetParent(basePivot.transform);
+            vetGameObj[7].transform.SetParent(basePivot.transform);
+            vetGameObj[19].transform.SetParent(basePivot.transform);
+            vetGameObj[20].transform.SetParent(basePivot.transform);
+
+            basePivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
+
+            RemoveParentsFromObjects(new int[] { 0, 1, 2, 13, 14, 10, 11, 12, 9, 16, 17, 6, 7, 19, 20 });
+        }
+        if (Input.GetKeyDown(rotationMeioPivot))
+        {
+            // =============== Parede Rosa ===============
+            vetGameObj[3].transform.SetParent(meioPivot.transform);
+            vetGameObj[4].transform.SetParent(meioPivot.transform);
+            vetGameObj[15].transform.SetParent(meioPivot.transform);
+
+            // =============== Parede Vermelha ===============
+            vetGameObj[18].transform.SetParent(meioPivot.transform);
+
+            // =============== Parede Amarela ===============
+            vetGameObj[8].transform.SetParent(meioPivot.transform);
+            vetGameObj[21].transform.SetParent(meioPivot.transform);
+
+            meioPivot.transform.RotateAround(meioPivot.transform.position, Vector3.up, 120);
+
+            RemoveParentsFromObjects(new int[] { 3, 4, 15, 18, 8, 21});
+        }
+        if (Input.GetKeyDown(rotationTopoPivot))
+        {
+            // =============== Parede Rosa ===============
+            vetGameObj[5].transform.SetParent(topoPivot.transform);
+
+            topoPivot.transform.RotateAround(topoPivot.transform.position, Vector3.up, 120);
+
+            RemoveParentsFromObjects(new int[] { 5 });
+        }
+
+        if (Input.GetKeyDown(rotationSolo0Pivot))
+        {
+            // =============== Parede Rosa ===============
+            vetGameObj[0].transform.SetParent(solo0Pivot.transform);
+
+            solo0Pivot.transform.RotateAround(solo0Pivot.transform.position, new Vector3(-0.811f, -0.351f, -0.468f), 120);
+
+            RemoveParentsFromObjects(new int[] { 0 });
+        }
+
+        if (Input.GetKey(rotationSolo2Pivot))
+        {
+            // =============== Parede Rosa ===============
+            vetGameObj[2].transform.SetParent(solo2Pivot.transform);
+
+            solo2Pivot.transform.Rotate(new Vector3(0.811f, -0.351f, -0.468f), rotationSpeed * Time.deltaTime);
+
+            RemoveParentsFromObjects(new int[] { 2 });
+        }
+
+        if (Input.GetKeyDown(rotationSolo7Pivot))
+        {
+            // =============== Parede Rosa ===============
+            vetGameObj[7].transform.SetParent(solo7Pivot.transform);
+
+            solo7Pivot.transform.RotateAround(solo7Pivot.transform.position, new Vector3(0f, -0.351f, 0.936f), 120);
+
+            RemoveParentsFromObjects(new int[] { 7 });
+        }
+    }
+
+    void RemoveParentsFromObjects(int[] indices)
+    {
+        foreach (int index in indices)
+        {
+            vetGameObj[index].transform.SetParent(null);
+        }
+    }
 }
