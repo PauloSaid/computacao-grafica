@@ -131,6 +131,10 @@ public class manager : MonoBehaviour {
 
         //basePivot.transform.Rotate(eixoVertical, 120f, Space.World);
 
+	basePivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
+        meioPivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
+        topoPivot.transform.RotateAround(basePivot.transform.position, Vector3.up, 120);
+
 
 
 
